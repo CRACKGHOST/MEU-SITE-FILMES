@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MEU SITE FILMES</title>
 <style>
-body{margin:0;background:#0f0f0f;color:#fff;font-family:Arial}
-h1{text-align:center;padding:15px}
-.grade{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;padding:15px}
-.card{width:140px;cursor:pointer}
-.card img{width:100%;border-radius:10px}
-.card p{text-align:center;font-size:14px}
-#player{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;z-index:999}
-#player video{width:100%;height:90%}
-#player button{padding:10px;width:100%;background:red;color:#fff;border:0;font-size:18px}
+body{background:#0f0f0f;color:white;font-family:Arial;margin:0;padding:20px}
+h1{text-align:center;color:#e50914}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}
+.card{background:#1f1f1f;border-radius:8px;overflow:hidden;cursor:pointer}
+.card img{width:100%;height:210px;object-fit:cover}
+.card p{padding:8px;text-align:center;font-size:14px;margin:0}
+#player{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;z-index:99;flex-direction:column;justify-content:center;align-items:center}
+#player video{width:90%;max-width:800px}
 </style>
 </head>
 <body>
-<h1>🎬 MEU SITE FILMES</h1>
-
-<div class="grade">
-  <div class="card" onclick="ver('https://www.w3schools.com/html/mov_bbb.mp4')">
-    <img src="https://image.tmdb.org/t/p/w200/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg">
-    <p>Filme Teste 1</p>
-  </div>
-  <div class="card" onclick="ver('https://www.w3schools.com/html/movie.mp4')">
-    <img src="https://image.tmdb.org/t/p/w200/74xTEgt7R36Fpooo50r9T25onhq.jpg">
-    <p>Filme Teste 2</p>
-  </div>
-</div>
+<h1>MEU SITE FILMES</h1>
+<div class="grade" id="grade"></div>
 
 <div id="player">
-  <button onclick="fechar()">X FECHAR</button>
+  <h2 id="titulo"></h2>
   <video id="video" controls autoplay></video>
+  <button onclick="fechar()" style="margin-top:15px;padding:10px 20px;background:red;color:white;border:none;border-radius:5px">FECHAR</button>
 </div>
 
 <script>
-function ver(link){
-  document.getElementById('video').src=link;
-  document.getElementById('player').style.display='block';
+const filmes = [
+{t:"Vingadores: Ultimato", c:"https://image.tmdb.org/t/p/w200/or06FN3Dka5tukK1e9sl16pB3iy.jpg", v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Homem-Aranha", c:"https://image.tmdb.org/t/p/w200/1E5baAaEse26fej7uHcjOgEE2k.jpg", v:"https://www.w3schools.com/html/movie.mp4"},
+{t:"Batman", c:"https://image.tmdb.org/t/p/w200/74xTEgt7R36Fpooo50r9T25onhq.jpg", v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Velozes e Furiosos 10", c:"https://image.tmdb.org/t/p/w200/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg", v:"https://www.w3schools.com/html/movie.mp4"},
+{t:"Super Mario Bros", c:"https://image.tmdb.org/t/p/w200/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg", v:"https://www.w3schools.com/html/mov_bbb.mp4"},
+{t:"Barbie", c:"https://image.tmdb.org/t/p/w200/iuFNMS8U5cb6xfzi81QhlBKV3A.jpg", v:"https://www.w3schools.com/html/mov_bbb.mp4"}
+];
+
+const grade = document.getElementById('grade');
+filmes.forEach(f=>{
+  grade.innerHTML+=`<div class="card" onclick="ver('${f.v}','${f.t}')"><img src="${f.c}"><p>${f.t}</p></div>`
+});
+
+function ver(link,titulo){
+ document.getElementById('player').style.display='flex';
+ document.getElementById('video').src=link;
+ document.getElementById('titulo').innerText=titulo;
 }
 function fechar(){
-  document.getElementById('player').style.display='none';
-  document.getElementById('video').pause();
-  document.getElementById('video').src='';
+ document.getElementById('player').style.display='none';
+ document.getElementById('video').pause();
+ document.getElementById('video').src='';
 }
-  <div class="card" onclick="ver('LINK-DO-FILME-AQUI')">
-  <img src="LINK-DA-CAPA-AQUI">
-  <p>NOME DO FILME</p>
-</div>
 </script>
 </body>
 </html>
