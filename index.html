@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CineFlix</title>
-	<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Site Filmes</title>
+<style>
+body{background:#111;color:#fff;font-family:Arial;text-align:center}
+.filme{display:inline-block;margin:10px;cursor:pointer}
+.filme img{width:150px;border-radius:10px}
+#player{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:999}
+#player iframe{width:100%;height:90%;border:0}
+</style>
 </head>
 <body>
-	<header><h1>CineFlix</h1><input id="busca" placeholder="Buscar filme..."></header>
-	<select id="tipo">
-		<option value="trending">Em alta</option>
-		<option value="populares">Filmes populares</option>
-		<option value="series">Séries</option>
-		<option value="animes">Animes</option>
-	</select>
-	<div id="filmes" class="grid"></div>
-	<button id="carregarMais">Carregar mais</button>
-	<script src="script.js"></script>
+<h1>MEU SITE FILMES</h1>
+
+<div class="filme" onclick="assistir('https://vidsrc.to/embed/movie/550')">
+<img src="https://image.tmdb.org/t/p/w200/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg">
+<p>Clube da Luta</p>
+</div>
+
+<div id="player">
+<button onclick="fechar()" style="padding:10px">FECHAR X</button>
+<iframe id="video" allowfullscreen></iframe>
+</div>
+
+<script>
+function assistir(link){document.getElementById('video').src=link;document.getElementById('player').style.display='block'}
+function fechar(){document.getElementById('player').style.display='none';document.getElementById('video').src=''}
+</script>
 </body>
 </html>
